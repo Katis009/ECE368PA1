@@ -46,12 +46,30 @@ int List_Save_To_File(char *filename, Node *list){
       list = list->next;
       i++;
     
-   } while (list != NULL); // fptr was *array it seemed wrong so i changed it but maybe it was that way for a reason idk
+   } while (list != NULL);
    fclose(fptr);
    return i;
 }
 
-Node *List_Shellsort(Node *list, long *n_comp);
+Node *List_Shellsort(Node *list, long *n_comp){
+   *n_comp = 0;
+   int seq_size;
+   long* sequence;
+   Node* curr = list;
+   int n = 0;
+   while (curr != NULL){
+      n++;
+      curr = curr->next;
+   }
+   sequence = Generate_2p3q_Seq(n, &seq_size);  //generate sequence of gap values
+
+   long gap;
+   for (int seqInd = seq_size - 1; seqInd >= 0; seqInd--){
+      gap = sequence[seqInd];
+
+   }
+
+}
 
 void push(Node * head, long val) {
     Node * current = head;
