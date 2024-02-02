@@ -7,6 +7,8 @@ typedef struct _Node {
 } Node;
 
 void push(Node * head, long val);
+long arrayify(Node * head, int ind);
+
 
 Node *List_Load_From_File(char *filename, int *status){
    int n = sizeof(filename)/sizeof(long); 
@@ -67,6 +69,7 @@ Node *List_Shellsort(Node *list, long *n_comp){
    for (int seqInd = seq_size - 1; seqInd >= 0; seqInd--){
       gap = sequence[seqInd];
 
+
    }
 
 }
@@ -85,4 +88,12 @@ void push(Node * head, long val) {
       }
     current->next->value = val;
     current->next->next = NULL;
+}
+
+long arrayify(Node * head, int ind){
+   Node * current = head;
+   for (int i = 0; i < ind; i++){
+      current = current->next;
+   }
+   return current->value;
 }
