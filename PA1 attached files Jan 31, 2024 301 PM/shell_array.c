@@ -18,8 +18,7 @@ long *Array_Load_From_File(char *filename, int *size){
     //long mark;
     fread(&array, sizeof(long), *size, fptr);
     fclose(fptr);
-
-
+    return &array;
 
 }
 
