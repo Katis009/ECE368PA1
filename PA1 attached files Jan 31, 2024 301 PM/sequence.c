@@ -4,11 +4,11 @@ long *Generate_2p3q_Seq(int n, int *seq_size){
 
     long q = 0;
     long p = 0;
-    while (3^q < n){
+    while (exponent(3, q) < n){
         q++;
     }
     long qStar = q - 1;
-    while (2^p < n){
+    while (exponent(2, p) < n){
         p++;
     }
     long pStar = p - 1;
@@ -22,9 +22,9 @@ long *Generate_2p3q_Seq(int n, int *seq_size){
     long i = 0;
     for (q = 0; q <= qStar; q++){
         for (p = 0; p <= pStar; p++){
-            if (((2^p)*(3^q)) < n){
+            if (((exponent(2, p))*(exponent(3, q))) < n){
                 array = (long*)realloc(array, sizeof(long) * (i + 1));
-                array[i] = (2^p)*(3^q);
+                array[i] = exponent(2, p) * exponent(3, q);
                 i++;
             }
             else{
@@ -56,4 +56,12 @@ long *Generate_2p3q_Seq(int n, int *seq_size){
     //return &array;
     return array;
 
+}
+
+long exponent(long x, long y){
+    long z = x;
+    for (long i = 1; i < y; i++){
+        z *= x;
+    }
+    return z;
 }
