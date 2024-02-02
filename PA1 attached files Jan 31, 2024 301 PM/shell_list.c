@@ -7,7 +7,8 @@ typedef struct _Node {
 } Node;
 
 void push(Node * head, long val);
-long arrayify(Node * head, int ind);
+Node *arrayify(Node * head, int ind);
+void exchange(Node * head, int a, int b);
 
 
 Node *List_Load_From_File(char *filename, int *status){
@@ -68,6 +69,25 @@ Node *List_Shellsort(Node *list, long *n_comp){
    long gap;
    for (int seqInd = seq_size - 1; seqInd >= 0; seqInd--){
       gap = sequence[seqInd];
+      int r = 0;
+      int last_element;
+      int sorted = 0;
+      int last_exchange = n;
+      while((r < gap) && ((r + gap) < n)){
+         while (sorted == 0){
+            sorted = 1;
+            last_element = last_exchange - 1;
+            for (int b = gap + r; b <= last_element; b += gap){
+               *n_comp++;
+               if (arrayify(list, (b - gap))->value > arrayify(list, b)->value){
+                  exchange(list, b - gap, b);
+                  last_exchange = b;
+                  sorted = 0;
+               }
+            }
+         }
+         r++;
+      }
 
 
    }
@@ -90,10 +110,17 @@ void push(Node * head, long val) {
     current->next->next = NULL;
 }
 
-long arrayify(Node * head, int ind){
+Node *arrayify(Node * head, int ind){
    Node * current = head;
    for (int i = 0; i < ind; i++){
       current = current->next;
    }
-   return current->value;
+   return &current;
+}
+
+void exchange(Node * head, int a, int b){
+   arrayify(head, a - 1)->next = arrayify(head, b);
+   arrayify(head, b - 1)->next = arrayify(head, a);
+   arrayify(head, b)->next = arrayify(head, a + 1);
+   arrayify(head, a)->next = arrayify(head, b + 1);
 }
