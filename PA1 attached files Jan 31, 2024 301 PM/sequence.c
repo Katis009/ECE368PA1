@@ -26,7 +26,7 @@ long *Generate_2p3q_Seq(int n, int *seq_size){
     for (q = 0; q <= qStar; q++){
         for (p = 0; p <= pStar; p++){
             if (((exponent(2, p))*(exponent(3, q))) < n){
-                array = (long*)realloc(array, sizeof(long) * (i + 1));
+                array = (long*)realloc(array, sizeof(long) * (i + 1));  // should check that realloc is working right here. but cant check if array == NULL because it was already malloc-ed earlier
                 array[i] = exponent(2, p) * exponent(3, q);
                 i++;
             }
