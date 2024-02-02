@@ -28,12 +28,28 @@ Node *List_Load_From_File(char *filename, int *status){
       fread(val, sizeof(long), 1, fptr);
       push(head, val);
    }
+   fclose(fptr);
    *status = 0;
    return &head;
 
 }
 
-int List_Save_To_File(char *filename, Node *list);
+int List_Save_To_File(char *filename, Node *list){
+   FILE *fptr;
+   fptr = fopen(*filename, "w");
+   if (fptr == NULL){
+      return -1;
+   }
+   int i = 0;
+   do {
+      fwrite(list->value, sizeof(long), 1, fptr);
+      list = list->next;
+      i++;
+    
+   } while (list != NULL); // fptr was *array it seemed wrong so i changed it but maybe it was that way for a reason idk
+   fclose(fptr);
+   return i;
+}
 
 Node *List_Shellsort(Node *list, long *n_comp);
 

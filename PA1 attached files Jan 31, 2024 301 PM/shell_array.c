@@ -35,7 +35,7 @@ int Array_Save_To_File(char *filename, long *array, int size){
         fwrite(*array, sizeof(long), 1, fptr);
         i++;
     
-    } while (fptr != EOF); // fptr was *array it seemed wrong so i changed it but maybe it was that way for a reason idk
+    } while (*array != EOF); // fptr was *array it seemed wrong so i changed it but maybe it was that way for a reason idk
     fclose(fptr);
     return i;
 }
