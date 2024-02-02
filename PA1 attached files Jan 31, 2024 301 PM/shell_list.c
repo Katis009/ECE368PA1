@@ -28,6 +28,8 @@ Node *List_Load_From_File(char *filename, int *status){
       fread(val, sizeof(long), 1, fptr);
       push(head, val);
    }
+   *status = 0;
+   return &head;
 
 }
 
@@ -45,7 +47,7 @@ void push(Node * head, long val) {
     current->next = (Node *) malloc(sizeof(Node));
     if (current->next == NULL){
          int *status = -1;
-         return &head;
+         return &current->next;
       }
     current->next->value = val;
     current->next->next = NULL;
