@@ -1,5 +1,8 @@
 #include <stdlib.h>
 
+long exponent(long x, long y);
+
+
 long *Generate_2p3q_Seq(int n, int *seq_size){
 
     long q = 0;
