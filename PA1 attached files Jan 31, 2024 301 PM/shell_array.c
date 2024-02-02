@@ -39,7 +39,7 @@ int Array_Save_To_File(char *filename, long *array, int size){
 
 void Array_Shellsort(long *array, int size, long *n_comp){
 
-
+    *n_comp = 0;
     //long *Generate_2p3q_Seq(int n, int *seq_size)
     int seq_size;
     long* sequence;
@@ -87,6 +87,6 @@ void Array_Shellsort(long *array, int size, long *n_comp){
             *n_comp++;
             array[j] = temp;
             */
-        }
+        //}
     }
 }
