@@ -15,13 +15,26 @@ long *Array_Load_From_File(char *filename, int *size){
         int *size = 0;
         return NULL;
     }
-    //long mark;
     fread(&array, sizeof(long), size, fptr);
     fclose(fptr);
     return &array;
 
 }
 
-int Array_Save_To_File(char *filename, long *array, int size);
+int Array_Save_To_File(char *filename, long *array, int size){
+    FILE *fptr;
+    fptr = fopen(*filename, "w");
+    if ((fptr == NULL) || (*array == NULL)){
+        return -1;
+    }
+    int i = 0;
+    do {
+        fwrite(*array, sizeof(long), 1, fptr);
+        i++;
+    
+    } while (*array != EOF);
+    fclose(fptr);
+    return i;
+}
 
 void Array_Shellsort(long *array, int size, long *n_comp);
