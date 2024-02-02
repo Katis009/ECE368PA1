@@ -4,7 +4,7 @@
 long *Array_Load_From_File(char *filename, int *size){
     *size = (sizeof(filename)/sizeof(long));
     long* array;
-    array = (long*)malloc(*size);
+    array = (long*)malloc(sizeof(filename));
     if (array == NULL){
         int *size = 0;
         return NULL;
@@ -16,7 +16,7 @@ long *Array_Load_From_File(char *filename, int *size){
         return NULL;
     }
     //long mark;
-    fread(&array, sizeof(long), *size, fptr);
+    fread(&array, sizeof(long), size, fptr);
     fclose(fptr);
     return &array;
 
