@@ -91,7 +91,7 @@ Node *List_Shellsort(Node *list, long *n_comp){
 
 
    }
-   return 
+   return &list;
 
 }
 
