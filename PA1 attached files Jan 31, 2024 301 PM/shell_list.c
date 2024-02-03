@@ -11,7 +11,7 @@ Node *arrayify(Node * head, int ind);
 void exchange(Node * head, int a, int b);
 
 
-Node *List_Load_From_File(char *filename, int *status){
+Node *List_Load_From_File(char *filename, int *status){  //returns head of list
    int n = sizeof(filename)/sizeof(long); 
    Node* head = (Node*)malloc(sizeof(Node));
       if (head == NULL){
@@ -37,7 +37,7 @@ Node *List_Load_From_File(char *filename, int *status){
 
 }
 
-int List_Save_To_File(char *filename, Node *list){
+int List_Save_To_File(char *filename, Node *list){ // returns the number of integers successfully written to the file
    FILE *fptr;
    fptr = fopen(*filename, "w");
    if (fptr == NULL){
@@ -80,7 +80,7 @@ Node *List_Shellsort(Node *list, long *n_comp){
             for (int b = gap + r; b <= last_element; b += gap){
                *n_comp++;
                if (arrayify(list, (b - gap))->value > arrayify(list, b)->value){
-                  exchange(list, b - gap, b);
+                  exchange(list, (b - gap), b);
                   last_exchange = b;
                   sorted = 0;
                }
@@ -91,6 +91,7 @@ Node *List_Shellsort(Node *list, long *n_comp){
 
 
    }
+   return 
 
 }
 
@@ -119,8 +120,38 @@ Node *arrayify(Node * head, int ind){
 }
 
 void exchange(Node * head, int a, int b){
-   arrayify(head, a - 1)->next = arrayify(head, b);
-   arrayify(head, b - 1)->next = arrayify(head, a);
-   arrayify(head, b)->next = arrayify(head, a + 1);
-   arrayify(head, a)->next = arrayify(head, b + 1);
+   //Node * tempBprev = arrayify(head, b - 1);
+   Node * tempBprev2 = arrayify(head, b - 2);
+   //Node * tempAprev = arrayify(head, a - 1);
+   Node * tempBprev = tempBprev2->next;
+   Node * tempB = tempBprev->next;
+   if (arrayify(head, a) == head){
+      if ((b - a) == 1){
+         head->next = tempB->next;
+         tempBprev->next->next = head;
+         head = tempBprev->next;
+      }
+      else{
+         Node * tempA = head; 
+         head->next = tempB->next;
+         tempBprev->next->next = tempA->next;
+         tempBprev2->next->next = head;
+         head = tempBprev->next;
+      }
+      
+   }
+   else if ((b - a) == 1){
+      tempBprev->next->next = tempBprev2->next;
+      arrayify(head, a - 1)->next = tempBprev->next;
+      tempBprev->next->next->next = tempB->next;
+   }
+   else {
+      arrayify(head, b)->next = arrayify(head, a + 1);
+      arrayify(head, b - 1)->next = arrayify(head, a);
+      arrayify(head, a)->next = tempB->next;
+      arrayify(head, a - 1)->next = tempBprev->next;
+   }
+
+   
+   
 }
