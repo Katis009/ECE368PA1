@@ -101,7 +101,7 @@ void push(Node * head, long val) {
         current = current->next;
     }
 
-    /* now we can add a new variable */
+    
     current->next = (Node *) malloc(sizeof(Node));
     if (current->next == NULL){
          int *status = -1;

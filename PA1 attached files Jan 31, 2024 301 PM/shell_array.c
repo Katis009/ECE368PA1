@@ -16,9 +16,7 @@ long *Array_Load_From_File(char *filename, int *size){
         return NULL;
     }
     int nRead = fread(&array, sizeof(long), size, fptr);
-    if (nRead != size){
-        fprint("ERROR -> Array_Load_From_File: fread did not read the same number of elements as size"); //DELETE THIS BEFORE SUBMITTING YOU WILL LOSE POINTS
-    }
+    
     fclose(fptr);
     return &array;
 
@@ -35,7 +33,7 @@ int Array_Save_To_File(char *filename, long *array, int size){
         fwrite(*array, sizeof(long), 1, fptr);
         i++;
     
-    } while (*array != EOF); // fptr was *array it seemed wrong so i changed it but maybe it was that way for a reason idk
+    } while (*array != EOF); 
     fclose(fptr);
     return i;
 }
