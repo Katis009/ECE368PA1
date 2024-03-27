@@ -19,7 +19,8 @@ long *Generate_2p3q_Seq(int n, int *seq_size){
     long* array;
     array = (long*)malloc(0 * sizeof(long));
     if (array == NULL){
-        int *seq_size = 0;
+        //int *seq_size = 0;
+        *seq_size = 0;
         return NULL;
     }
     long i = 0;
@@ -35,7 +36,8 @@ long *Generate_2p3q_Seq(int n, int *seq_size){
             }
         }
     }
-    int *seq_size = i;
+    //int *seq_size = i;
+    *seq_size = i;
     //long* array2;
     //array2 = (long*)malloc(i * sizeof(long));
 
@@ -43,7 +45,7 @@ long *Generate_2p3q_Seq(int n, int *seq_size){
     long j = 1;
     long x = 0;
     long b = 0;
-    while (j < length(array)){
+    while (j < (sizeof(&array)/sizeof(array[0]))){
         x = array[j];
         b = j;
         while ((b > 0) && (array[b - 1] > x)){
@@ -57,7 +59,7 @@ long *Generate_2p3q_Seq(int n, int *seq_size){
     //array2 = array;
 
     //return &array;
-    return &array;
+    return array;
 
 }
 
@@ -68,3 +70,4 @@ long exponent(long x, long y){
     }
     return z;
 }
+
